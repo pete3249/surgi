@@ -1,92 +1,92 @@
 # Surgi
 
-A mobile-first web app that helps a patient prepare for and recover from routine surgery. The patient enters a surgery and a date, and Surgi builds a plain-language before/after checklist with a countdown, a timeline and progress tracking. Every screen reminds them that their surgeon's advice comes first.
+A mobile-first web app that helps patients prepare for and recover from routine orthopedic surgery. Even with AI at your fingertips, the details of a surgery can feel overwhelming. Surgi turns them into clear, manageable steps.
 
-## How the checklist is made
+The patient enters a surgery and a date. Surgi builds a before-and-after checklist with a countdown, a timeline and progress tracking. Every screen reminds them that their surgeon's advice comes first.
+
+## Features
+
+- **Checklist for any surgery.** Type "hip arthroscopy" or "carpal tunnel release"; there are no per-surgery templates to maintain.
+- **Vetted general checklist.** The same for every surgery and shown instantly: insurance, FMLA and disability forms, medicine-pause reminders, fasting, packing, mood check-ins, warning signs and home basics.
+- **Surgery-specific items.** AI adds items for physical therapy, equipment, home setup, what to pack and what to ask the surgeon. They are marked with a ✨.
+- **Reviewed plans.** Hip arthroscopy, shoulder arthroscopy and knee replacement have plans drafted ahead of time, read and edited by a person, and labeled "✓ Reviewed". Other surgeries are labeled "AI-written, not reviewed".
+- **Timeline.** One line from a month or more before surgery to month 2 of recovery, with a "You are here" marker.
+- **Key details card.** Patients enter the arrival time, fasting cut-off and medicine instructions their own care team gave them.
+- **Private by design.** Only the surgery name is sent to the server. The patient's name, date and progress stay on their device.
+
+## How it works
 
 ```
 Browser ── POST /api/plan {surgery} ──▶ Python server (holds the API key)
-   approved file in plans/?  ─▶ return it (no AI call, marked "Reviewed")
-   otherwise: 1. one short prompt (app/prompts.py) asks the AI model for surgery-specific items
-              2. guardrails validate the result (one retry if fewer than 4 good items)
-              3. cached per surgery and model (14 days), marked "AI-written, not reviewed"
+   approved plan in plans/?  ─▶ return it (no AI call)
+   otherwise: AI writes surgery-specific items ─▶ guardrails check them ─▶ cached for 14 days
 ```
 
-- **General first, tailored second.** `core-items.json` holds the vetted checklist that is the same for every surgery (insurance, FMLA forms, medicine-pause reminders, fasting, packing, warning signs, home basics). It appears instantly. AI-written items for the specific surgery are added afterward and marked ✨.
-- **No repeats.** `COVERED` in `app/prompts.py` lists the topics the general checklist already handles. Add a topic there when you add a core item in `pt`, `equip`, `home`, `bag` or `recovery` (a test reminds you).
-- **Any surgery works.** There are no per-surgery templates. Hip arthroscopy, shoulder arthroscopy and knee replacement (listed in `procedures.json` with the names patients type, like "TKA") also have person-read plans in `plans/`.
-- **No research is attached.** The model writes from widely accepted practice, nothing is cited, and the app says so.
-- **Privacy.** Only the surgery name is sent to the server. The patient's name, date and progress stay on the device.
+Surgi uses free AI models, so they’re sometimes slow or down. If so, the patient keeps the general checklist or tries again.
 
-### Guardrails (`app/guardrails.py`)
-- Items with medicine doses or fasting hours are dropped. Patients enter the times their own team gives them.
-- Safety-critical items (warning signs / call 911, confirm fasting, which medicines to pause) come only from `core-items.json`.
-- Near-duplicates of general items are dropped. Output is schema-checked, HTML-stripped and limited to the categories `pt`, `equip`, `home`, `bag` and `recovery`.
-- Text over 100 characters or detail over 240 is dropped, not cut. If fewer than 4 items survive, the request is retried once, then fails with a friendly error.
-- A per-IP rate limit and input sanitizing protect your API key.
+## Safeguards
 
-If the AI models are down, the patient keeps the general checklist or retries.
+- Safety-critical items (warning signs / call 911, confirming fasting times, which medicines to pause) come only from the vetted checklist. The AI never writes them.
+- Items with medicine doses or fasting hours are dropped, since those come from the patient's own team.
+- Items that repeat the general checklist, are too long, or don't fit the expected format are dropped. If too few good items remain, the request is retried once.
+- No research is attached. The AI writes from widely accepted practice, nothing is cited, and the app says so.
+- A per-IP rate limit and input sanitizing protect the API key.
 
-## Reviewed plans: draft, read, approve, ship
+## Built with
 
-```bash
-python -m app.make_plans list                              # drafts and approved plans per surgery
-python -m app.make_plans draft [surgery] [--runs 3]        # needs LLM_API_KEY
-python -m app.make_plans approve knee-replacement [--run 2]
-```
-
-1. `draft` writes `drafts/<surgery>.md` (read this) and `drafts/<surgery>.json` (edit this). `drafts/` is git-ignored and never deployed. Existing drafts are kept unless you pass `--force`.
-2. Fix or delete items in the `.json`, especially anything about weight bearing, braces, positions, driving or timing.
-3. `approve` re-runs the guardrails and writes `plans/<surgery>.json`. It refuses if guardrails would remove items, and won't replace an approved plan without `--force`.
-4. Commit `plans/` and deploy. `/api/health` should then show `reviewedPlans` equal to `procedures`.
-
-To add a surgery, add it to `procedures.json` and run `draft` for it. "Reviewed" means a person read and edited the plan, not that a clinician signed off. If one did, say so in `howBuilt()` in `index.html`.
-
-To try the prompt on any surgery without the cache or approved plans:
-
-```bash
-python -m app.try_plan "hip arthroscopy" --prompt   # print the prompt, no AI call
-python -m app.try_plan "hip arthroscopy"            # run it: model, time, kept vs dropped items
-python -m app.try_plan "hip arthroscopy" --json     # the cleaned plan as JSON
-```
+Python and FastAPI on the back end, a single-page `index.html` on the front end, and any OpenAI-compatible AI API (OpenRouter by default). Tests run offline with a mocked AI.
 
 ## Run it locally
 
 Needs Python 3.10+.
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
-echo "LLM_API_KEY=your-key" > .env                   # OpenRouter by default
-python -m app                                        # http://localhost:3000
-pytest                                               # offline tests with a mocked LLM
+echo "LLM_API_KEY=your-key" > .env
+python -m app        # http://localhost:3000
+pytest
 ```
 
-Open the app through the server, not by double-clicking `index.html`. `/docs` shows the API, and `/api/health` shows the model, whether the key is set, and how many core items, procedures and reviewed plans loaded.
+Opening `index.html` directly won't work; the app needs the server. `/docs` shows the API, and `/api/health` shows the model, whether the key is set, and how many core items, procedures and reviewed plans loaded.
 
-## Deploy
-
-**Render (Docker).** Push to GitHub (`.env` is git-ignored; double-check). Then **New + > Blueprint**, pick the repo, and paste `LLM_API_KEY` when asked. Check `/api/health` for `llmKeyConfigured: true`, `coreItems` above 0 and `reviewedPlans` equal to `procedures`. Free instances sleep when idle, and the plan cache is cleared on each deploy.
-
-**Vercel.** Import the folder and set `LLM_API_KEY` and `TRUST_PROXY_HEADERS=true`. `vercel.json` allows 60 seconds. The filesystem is temporary, so for durable caching swap `read_cache` and `write_cache` in `app/cache.py` for a database or Redis.
-
-**Anywhere else.**
+## Reviewed plans: draft, read, approve
 
 ```bash
-docker build -t surgi . && docker run --rm -p 8000:8000 --env-file .env surgi
+python -m app.make_plans list                              # which surgeries have a draft and an approved plan
+python -m app.make_plans draft                             # a draft for each supported surgery (needs LLM_API_KEY)
+python -m app.make_plans draft knee-replacement --runs 3   # three drafts of one surgery, to compare
+python -m app.make_plans approve knee-replacement          # after reading it; --run 2 approves the second draft
 ```
 
-Behind a proxy (Render, Vercel), set `TRUST_PROXY_HEADERS=true` so the rate limiter sees the real visitor IP. Leave it off when the app is directly exposed, because the header can be faked.
+1. `draft` writes `drafts/<surgery>.md` (read this, it has a review checklist) and `drafts/<surgery>.json` (edit this). `drafts/` is git-ignored, and `draft` never overwrites an existing draft unless you add `--force`.
+2. Fix or delete items in the `.json`. Pay most attention to anything about weight bearing, braces, positions, driving or timing.
+3. `approve` re-runs the guardrails on your edited file and writes `plans/<surgery>.json`. It refuses (and lists the items) if the guardrails would remove something, and won't replace an approved plan without `--force`.
+4. Commit `plans/`. `/api/health` shows `reviewedPlans`, which should equal `procedures`.
+
+To add a surgery, add it to `procedures.json` (slug, name, and the names patients type for it, like "TKA") and run `draft` for it. To change an approved plan later, edit `plans/<surgery>.json`, or approve a new draft with `--force`. Users keep their old items until they press the refresh button.
+
+## Trying the prompt on any surgery
+
+Useful for checking what patients get for a surgery with no reviewed plan.
+
+```bash
+python -m app.try_plan "carpal tunnel release" --prompt   # print the prompt, no AI call
+python -m app.try_plan "carpal tunnel release"            # run it: model, time, kept vs dropped items, readable plan
+python -m app.try_plan "carpal tunnel release" --json     # the cleaned plan as JSON
+```
+
+It runs the same steps as the web app. It skips the cache and the approved plans, so each run is a fresh answer, and for a supported surgery it shows the raw AI output rather than the reviewed plan. Read what it prints, especially the physical therapy, equipment and restriction items, before relying on it.
 
 ## Configuration
 
-Set these as environment variables or in `.env`. The rest (token limits, reasoning effort, cache directory) are in `app/config.py`.
+Set these as environment variables or in `.env`. The full list is in `app/config.py`.
 
 | Variable | Default | Notes |
 |---|---|---|
 | `LLM_API_KEY` | none | Required. Any OpenAI-compatible API |
-| `LLM_MODEL` | `openrouter/free` | First model to try. Free models fail and get retired, so set a fallback |
-| `LLM_FALLBACK_MODEL` | none | Comma-separated models tried in order |
+| `LLM_MODEL` | `oolside/laguna-s-2.1:free` | First model to try. Free models fail and get retired, so set a fallback |
+| `LLM_FALLBACK_MODEL` | `cohere/north-mini-code:free,openrouter/free` | Comma-separated models tried in order |
 | `LLM_BASE_URL` | OpenRouter | Any OpenAI-compatible endpoint |
 | `LLM_FIRST_TOKEN_SECONDS` | 45 | Give up on a model that is silent this long |
 | `LLM_TIMEOUT_SECONDS` | 60 | Max wait for one model |
@@ -99,9 +99,9 @@ Set these as environment variables or in `.env`. The rest (token limits, reasoni
 
 ## Limits to know about
 
-- The model writes from training data and can be wrong or out of date. No code can check medical accuracy, and surgeon protocols vary, which is why the app keeps saying "ask your surgeon."
-- Cached plans are shared between users of a deployment, so the first plan for a surgery sets what others see for 14 days.
-- This is a personal project. Before sharing widely, have a surgeon or PT review sample plans, and review the liability and privacy side.
-- Read a few real generated plans (`python -m app.try_plan`) before trusting them. The tests mock the LLM.
+- The AI writes from its training data and can be wrong or out of date. No code can check medical accuracy, and surgeon protocols vary, which is why the app keeps saying "ask your surgeon."
+- "Reviewed" means a person read and edited the plan, not that a clinician signed off.
+- Cached plans are shared between all users, so the first plan for a surgery sets what others see for 14 days.
+- This is a personal project.
 
 See `LEARNING.md` for a tour of the code.
