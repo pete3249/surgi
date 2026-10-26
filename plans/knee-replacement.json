@@ -1,0 +1,154 @@
+{
+ "source": "ai",
+ "surgery": "Knee replacement",
+ "expect": "Recovery from knee replacement is a gradual process, with most people walking with assistance early on and steadily gaining strength and motion over several months. Your surgeon will give you your own timeline.",
+ "items": [
+  {
+   "id": "pt-pre-ae76441e",
+   "phase": "pre",
+   "cat": "pt",
+   "d": -28,
+   "text": "Ask your therapist for a pre-surgery exercise plan",
+   "detail": "Gentle leg strengthening before surgery may help short-term pain and function; benefits tend to fade by a few months, so treat it as a head start."
+  },
+  {
+   "id": "pt-pre-ddac9315",
+   "phase": "pre",
+   "cat": "pt",
+   "d": -21,
+   "text": "Practice getting up from a chair safely",
+   "detail": "Standing and sitting with support, if your therapist recommends it, prepares you for early walking after surgery."
+  },
+  {
+   "id": "pt-post-5e439728",
+   "phase": "post",
+   "cat": "pt",
+   "d": 1,
+   "text": "Start gentle range-of-motion exercises",
+   "detail": "Therapists often begin on day 0 or 1; do the exercises you are taught several times a day."
+  },
+  {
+   "id": "pt-post-ddd967c9",
+   "phase": "post",
+   "cat": "pt",
+   "d": 7,
+   "text": "Focus on walking with support",
+   "detail": "Early therapy emphasizes safe walking with a walker or crutches, building confidence and balance as swelling decreases."
+  },
+  {
+   "id": "pt-post-2e39c3fc",
+   "phase": "post",
+   "cat": "pt",
+   "d": 21,
+   "text": "Strengthen legs and improve stair navigation",
+   "detail": "Most patients work on climbing stairs and strengthening muscles to regain independence in daily activities."
+  },
+  {
+   "id": "equ-pre-b7a4ae17",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -14,
+   "text": "Ask if you will need a knee brace",
+   "detail": "Practice varies: some surgeons use a brace early on and many do not. Follow your surgeon's instructions.",
+   "tier": "nice"
+  },
+  {
+   "id": "equ-pre-334c87a1",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -7,
+   "text": "Prepare an ice pack and a pillow for propping your leg",
+   "detail": "Ice for about 20 minutes at a time can ease swelling and pain. Prop your calf or foot; avoid a pillow directly under the knee.",
+   "tier": "nice"
+  },
+  {
+   "id": "hom-pre-06576731",
+   "phase": "pre",
+   "cat": "home",
+   "d": -7,
+   "text": "Set up a sturdy armchair or recliner at a safe height",
+   "detail": "A high-back chair with armrests makes sitting and standing easier; add a cushion if your seating is too low."
+  },
+  {
+   "id": "hom-post-47615b51",
+   "phase": "post",
+   "cat": "home",
+   "d": 3,
+   "text": "Ask your surgeon about sleeping positions",
+   "detail": "Many people can sleep in any position, but avoid a pillow or towel under the operated knee. Your surgeon may have specific advice."
+  },
+  {
+   "id": "hom-pre-6d5a0428",
+   "phase": "pre",
+   "cat": "home",
+   "d": -7,
+   "text": "Install grab bars in the bathroom",
+   "detail": "Bars near the toilet and shower can help with balance during early recovery."
+  },
+  {
+   "id": "bag-pre-b9ba7657",
+   "phase": "pre",
+   "cat": "bag",
+   "d": -1,
+   "text": "Bring any walker or crutches you were given",
+   "detail": "If your team supplied a walking aid or brace before the hospital stay, bring it. Hospitals often supply aids on loan."
+  },
+  {
+   "id": "rec-post-70060238",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask about weight-bearing limits",
+   "detail": "Many people are allowed full weight on the leg as pain allows, but some are not; follow your surgeon's specific instructions."
+  },
+  {
+   "id": "rec-post-8bfeef9c",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 7,
+   "text": "Clarify lifting and bending restrictions",
+   "detail": "Avoid lifting heavy objects or bending deeply; your surgeon will tell you what movements to avoid and when to resume them."
+  },
+  {
+   "id": "rec-post-d32f78ee",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 14,
+   "text": "Discuss return to work based on your job",
+   "detail": "Office work is often possible around 6 weeks; physically demanding jobs may need several more weeks. Your surgeon will advise based on your progress."
+  },
+  {
+   "id": "rec-pre-bdac2d05",
+   "phase": "pre",
+   "cat": "recovery",
+   "d": -28,
+   "text": "Ask which surgical approach and implant type you will have",
+   "detail": "The technique (such as minimally invasive or traditional) and implant design can affect recovery speed and restrictions; programs differ, so follow your surgeon’s plan."
+  },
+  {
+   "id": "equ-pre-2c3a9825",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -7,
+   "text": "Get a raised toilet seat or frame",
+   "detail": "It makes getting on and off the toilet easier; a commode is an option if your only toilet is on another floor.",
+   "tier": "need"
+  },
+  {
+   "id": "rec-post-04e28f8e",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask about compression stockings and blood clot prevention",
+   "detail": "Some surgeons advise stockings for several weeks and prescribe blood thinners; follow your team's instructions."
+  }
+ ],
+ "model": "dots-studio/dots-3-note-preview:free",
+ "generatedAt": "2026-10-26T18:06:23.028Z",
+ "stats": {
+  "dropped": 0,
+  "duplicates": 0
+ },
+ "fromCache": false,
+ "reviewed": true
+}

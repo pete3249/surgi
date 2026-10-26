@@ -1,0 +1,144 @@
+{
+ "source": "ai",
+ "surgery": "Hip arthroscopy",
+ "expect": "Most people walk soon after surgery and keep getting stronger over the next few weeks. Your surgeon will give you your own timeline.",
+ "items": [
+  {
+   "id": "pt-pre-d83c7280",
+   "phase": "pre",
+   "cat": "pt",
+   "d": -21,
+   "text": "Work with a therapist on hip and core strength",
+   "detail": "Therapists often focus on hip bending, balance, and core stability to help you move safely after surgery."
+  },
+  {
+   "id": "pt-pre-828ccd30",
+   "phase": "pre",
+   "cat": "pt",
+   "d": -14,
+   "text": "Practice using crutches or a walker",
+   "detail": "Getting used to moving with support before surgery can make the first days at home much easier."
+  },
+  {
+   "id": "equ-pre-b2bafe08",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -7,
+   "text": "Ask if you will need crutches",
+   "detail": "Most people use crutches for a period after surgery, but how long varies. Hospitals often supply them, so ask before surgery day."
+  },
+  {
+   "id": "equ-pre-a3fbcff6",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -5,
+   "text": "Ask about a hip brace",
+   "detail": "Some surgeons use a brace to limit hip rotation; others do not, so follow your surgeon's plan."
+  },
+  {
+   "id": "equ-pre-44b75658",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -3,
+   "text": "Plan for ice after exercise and surgery",
+   "detail": "Ice packs for 15-20 minutes a few times a day can ease swelling and pain; follow your team's advice on how often and for how long."
+  },
+  {
+   "id": "hom-pre-49da56f8",
+   "phase": "pre",
+   "cat": "home",
+   "d": -2,
+   "text": "Set up a recovery area on the main floor",
+   "detail": "Stairs can be tricky on crutches, so living on one level for the first days can help if your home allows it."
+  },
+  {
+   "id": "equ-pre-c0676b3d",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -2,
+   "text": "Ask if a raised toilet seat or shower chair would help",
+   "detail": "Not everyone needs these after hip arthroscopy. Your surgeon or therapist can say whether they suit your procedure.",
+   "tier": "nice"
+  },
+  {
+   "id": "hom-pre-14dde6ca",
+   "phase": "pre",
+   "cat": "home",
+   "d": -1,
+   "text": "Clear a wide path for walking",
+   "detail": "You will move slowly with crutches, so remove rugs and clutter from your main walking route."
+  },
+  {
+   "id": "bag-pre-fdc5711b",
+   "phase": "pre",
+   "cat": "bag",
+   "d": -1,
+   "text": "Bring a list of current medicines",
+   "detail": "Your surgeon needs to know all medicines and supplements you take, including over-the-counter drugs."
+  },
+  {
+   "id": "pt-post-8f5872dd",
+   "phase": "post",
+   "cat": "pt",
+   "d": 14,
+   "text": "Focus on walking and hip strength",
+   "detail": "Therapy often builds up walking distance and hip control over the first few weeks."
+  },
+  {
+   "id": "rec-post-2e89031c",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 28,
+   "text": "Ask when you can drive",
+   "detail": "Driving is often possible around 6 weeks, once you walk without crutches and can brake safely in an emergency; your surgeon will advise."
+  },
+  {
+   "id": "rec-post-70060238",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask about weight-bearing limits",
+   "detail": "Many people may put full weight on the leg as comfort allows, but some are limited for a few weeks; follow your surgeon's plan."
+  },
+  {
+   "id": "rec-post-594777eb",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask which hip movements to avoid",
+   "detail": "Many surgeons advise avoiding sudden or twisting movements for a while, but the rules depend on what was done. Follow your surgeon's plan."
+  },
+  {
+   "id": "rec-post-b4e31f32",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 14,
+   "text": "Ask about lifting and work restrictions",
+   "detail": "Desk jobs may be possible within a couple of weeks, active jobs by about 6 weeks, and very heavy jobs closer to 3 months; your surgeon will advise."
+  },
+  {
+   "id": "rec-post-55a3da86",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Confirm which version of surgery you had",
+   "detail": "Repair versus decompression changes recovery time, so ask your surgeon exactly what was done."
+  },
+  {
+   "id": "pt-post-47223f8c",
+   "phase": "post",
+   "cat": "pt",
+   "d": 0,
+   "text": "Ask when physical therapy will start",
+   "detail": "Early sessions usually begin within the first days to 2 weeks, with gentle exercises done several times a day as taught."
+  }
+ ],
+ "model": "poolside/laguna-s-2.1:free",
+ "generatedAt": "2026-10-26T18:29:55.466Z",
+ "stats": {
+  "dropped": 0,
+  "duplicates": 1
+ },
+ "fromCache": false,
+ "reviewed": true
+}

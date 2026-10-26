@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f8b8d">
+<title>Surgi</title>
+<style>
+:root{
+  --bg:#f4faf8; --card:#ffffff; --text:#1d2b2c; --muted:#5b6f70; --line:#dbe8e5;
+  --primary:#0f8b8d; --primary-d:#0b6b6d; --accent:#ff8a5b; --ok:#2e9d62; --warn:#fff4e5; --warn-t:#8a4b00;
+  --radius:16px; --shadow:0 2px 10px rgba(15,139,141,.08);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1b1c; --card:#172627; --text:#e8f3f1; --muted:#9bb3b0; --line:#27403f; --primary:#3cc0c2; --primary-d:#7fdadb; --warn:#2c2416; --warn-t:#ffcf8a; --shadow:none}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 48px}
+.banner{background:var(--warn);color:var(--warn-t);font-size:14px;padding:10px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.banner b{font-weight:700}
+.brand{max-width:640px;margin:0 auto;padding:14px 16px 0;font-size:28px;font-weight:800;letter-spacing:-.5px;color:var(--primary)}
+.brand span{color:var(--accent)}
+h1{font-size:26px;line-height:1.2;margin:22px 0 6px}
+h2{font-size:19px;margin:0 0 8px}
+h3{font-size:16px;margin:0}
+p{margin:0 0 10px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+label.f{display:block;font-weight:600;margin:12px 0 4px}
+input[type=text],input[type=date],input[type=tel],input[type=password],select,textarea{
+  width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:46px}
+textarea{min-height:74px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 45%,transparent);outline-offset:1px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px 20px;min-height:46px;background:var(--primary);color:#fff;cursor:pointer}
+.btn:hover{background:var(--primary-d)}
+.btn.ghost{background:transparent;color:var(--primary-d);border:1.5px solid var(--primary)}
+.btn.danger{background:transparent;color:#c0392b;border:1.5px solid #c0392b}
+.btn.sm{padding:8px 14px;min-height:38px;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr;gap:0 12px}
+@media(min-width:520px){.grid2{grid-template-columns:1fr 1fr}}
+
+/* countdown */
+.count{background:linear-gradient(135deg,var(--primary),#2fb5a5);color:#fff;border:0;text-align:center;padding:22px 16px}
+.count .big{font-size:64px;font-weight:800;line-height:1}
+.count .lbl{font-size:18px;font-weight:600;margin-top:4px}
+.count .sub{opacity:.92;margin-top:6px}
+.bars{display:grid;gap:10px;margin-top:16px;text-align:left}
+.bar{height:10px;background:rgba(255,255,255,.3);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:#fff;border-radius:99px;transition:width .3s}
+.barlbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+
+/* tabs */
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;margin:16px 0;position:sticky;top:6px;z-index:5;box-shadow:var(--shadow)}
+.tabs button{flex:1;font:inherit;font-weight:700;font-size:14px;border:0;background:transparent;color:var(--muted);padding:10px 4px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--primary);color:#fff}
+
+/* timeline */
+.tl{position:relative;margin:8px 0 8px;padding-left:30px}
+.tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;border-radius:3px;background:var(--line)}
+.tn{position:relative;margin:0 0 14px}
+.tn::before{content:"";position:absolute;left:-29px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--card);border:3px solid var(--primary);box-sizing:border-box}
+.tn.done::before{background:var(--ok);border-color:var(--ok)}
+.tn.open-past::before{border-color:var(--accent)}
+.tn.later::before{border-color:var(--line)}
+.tn.surgery::before{width:21px;height:21px;left:-32px;top:1px;background:var(--primary);border-color:var(--primary)}
+.tn.now::before{width:21px;height:21px;left:-32px;top:2px;background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 25%,transparent)}
+.tn>summary,.tn>.tn-head{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tn>summary::-webkit-details-marker{display:none}
+.tn-title{font-weight:700;display:block}
+.tn-sub{font-size:13px;color:var(--muted);display:block}
+.tn-badge{flex:none;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-d);white-space:nowrap}
+.tn-badge.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+.tn-badge.warn{background:var(--warn);color:var(--warn-t)}
+.tn ul.list{margin-top:10px}
+.tn.now .tn-title{color:var(--accent)}
+@media print{.tl details{display:block}}
+
+/* checklist */
+.cat{margin:22px 0 8px}
+.cat h2{display:flex;gap:8px;align-items:center;margin:0}
+.cat .hint{font-size:13px;color:var(--muted);margin:2px 0 8px}
+ul.list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.item{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.item.done{opacity:.62}
+.item.done .t{text-decoration:line-through}
+.chk{position:relative;flex:none;width:28px;height:28px;margin-top:1px;cursor:pointer}
+.chk input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chk .box{position:absolute;inset:0;border:2px solid var(--primary);border-radius:9px;background:var(--card);display:grid;place-items:center;color:#fff;font-weight:900;font-size:16px}
+.chk input:checked+.box{background:var(--ok);border-color:var(--ok)}
+.chk input:checked+.box::after{content:"✓"}
+.chk input:focus-visible+.box{outline:3px solid color-mix(in srgb,var(--primary) 45%,transparent);outline-offset:2px}
+.item details{flex:1;min-width:0}
+.item summary{cursor:pointer;list-style:none;display:block}
+.item summary::-webkit-details-marker{display:none}
+.item .t{font-weight:600;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.chip{font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-d)}
+.chip.need{background:color-mix(in srgb,var(--accent) 22%,transparent);color:#b4491a}
+@media(prefers-color-scheme:dark){.chip.need{color:#ffb08f}}
+.chip.late{background:var(--warn);color:var(--warn-t)}
+.chip.ai{background:#efe7ff;color:#5b3aa6}
+.more{margin-top:8px;font-size:15px}
+.safe{font-size:13px;color:var(--muted);border-left:3px solid var(--accent);padding-left:8px}
+.add{display:grid;gap:8px;margin-top:18px}
+.empty{text-align:center;padding:26px 10px;color:var(--muted)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-top:10px}
+.toggle input{width:20px;height:20px}
+.note{background:color-mix(in srgb,var(--primary) 9%,var(--card));border-radius:14px;padding:12px 14px;font-size:15px;margin:12px 0}
+footer{max-width:640px;margin:10px auto 30px;padding:0 16px;font-size:13px;color:var(--muted);text-align:center}
+.status{font-size:14px;min-height:20px;margin-top:8px}
+.status.err{color:#c0392b}
+.hide{display:none!important}
+@media print{
+  .banner,.tabs,.btn,.add,.toggle,details .more~*{display:none!important}
+  details{display:block} details>*{display:block!important}
+  body{background:#fff;color:#000} .card,.item{box-shadow:none;break-inside:avoid}
+  .count{background:#fff!important;color:#000;border:1px solid #000}
+  .bars{display:none}
+}
+
+.note.err{background:#fdecea;color:#8a1f11}
+@media(prefers-color-scheme:dark){.note.err{background:#3a1c18;color:#ffb4a8}}
+.loading{text-align:center;padding:30px 16px}
+.spin{width:44px;height:44px;margin:0 auto 14px;border:4px solid color-mix(in srgb,var(--primary) 25%,transparent);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation:none}}
+a{color:var(--primary-d)}
+
+.building{display:flex;gap:14px;align-items:center}
+.building p{margin:2px 0 0}
+.spin.sm{width:28px;height:28px;margin:0;border-width:3px;flex:none}
+.chip.tailored{background:#efe7ff;color:#5b3aa6}
+@media(prefers-color-scheme:dark){.chip.tailored{background:#3a2d5c;color:#d9c8ff}}
+</style>
+</head>
+<body>
+<div class="banner" role="note"><b>Friendly guide, not medical advice.</b> Always follow your surgeon’s and care team’s instructions. If anything here is different from what they told you, <b>they’re right</b>.</div>
+<div class="brand" aria-label="Surgi">Surgi<span>.</span></div>
+<div class="wrap"><main id="app"></main></div>
+<footer>This checklist is a general starting point to help you stay organized. Every surgeon, hospital and patient is different — please confirm each item with your surgeon or care team. In an emergency, call 911.<br><span style="opacity:.6">page build 2026-10-22-timeline-10</span></footer>
+
+<script>
+"use strict";
+// Safe logger: some embedded previews and extensions replace `console` with a partial object.
+const dbg = (level, ...args) => { try { (console[level] || console.log).apply(console, args); } catch (e) { /* never let logging break the app */ } };
+dbg("info", "[app] page build 2026-10-22-timeline-10");
+/* ============================================================
+   Helpers
+============================================================ */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const KEY = "ready-for-surgery-v2";
+const OLD_KEY = "ready-for-surgery-v1";
+
+const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const parseDate = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+const diffDays = (a, b) => Math.round((startOfDay(a) - startOfDay(b)) / 86400000);
+const isoDay = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const fmt = d => d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+const fmtLong = d => d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+const todayISO = () => { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; };
+
+/* ============================================================
+   Categories (display only: the checklist content itself comes from the plan)
+============================================================ */
+const CATS = {
+  insurance: { icon: "🧾", label: "Insurance approval", hint: "Getting this sorted early avoids last-minute surprises." },
+  paperwork: { icon: "📄", label: "Work paperwork (FMLA, disability, return to work)", hint: "Offices can take a couple of weeks to fill out forms, so start early." },
+  pt:        { icon: "💪", label: "Physical therapy", hint: "Only do exercises your surgeon or therapist approve." },
+  meds:      { icon: "💊", label: "Medicines", hint: "Never start or stop a medicine on your own. Ask your surgeon or pharmacist." },
+  equip:     { icon: "🧊", label: "Medical equipment", hint: "Your surgeon or physical therapist can tell you which items you really need." },
+  home:      { icon: "🏡", label: "Home & meal prep", hint: "A little setup now means a calmer first week." },
+  fast:      { icon: "⏰", label: "Fasting & the day before", hint: "Your team’s exact instructions come first." },
+  bag:       { icon: "🎒", label: "What to bring on surgery day", hint: "Ask your hospital for its own packing list too." },
+  recovery:  { icon: "🌱", label: "Healing & warning signs", hint: "Healing takes time. Small steps count." },
+};
+const PRE_ORDER  = ["insurance","paperwork","pt","meds","equip","home","fast","bag"];
+const POST_ORDER = ["recovery","meds","pt","equip","home","paperwork"];
+
+// Only search suggestions: any surgery name works, since plans are generated.
+const SUGGESTIONS = ["Hip arthroscopy","Knee arthroscopy","ACL reconstruction","Total knee replacement","Total hip replacement","Rotator cuff repair","Shoulder arthroscopy","Gallbladder removal","Hernia repair","Spinal fusion","Carpal tunnel release","Cataract surgery","Appendectomy","Hysterectomy","Tonsillectomy","Bunion surgery"];
+
+/* ============================================================
+   State
+============================================================ */
+let state = load();
+let CORE = [];   // the general checklist, identical for every surgery (core-items.json), shown instantly
+let ui = { tab: "timeline", tl: {}, hideDone: false, open: new Set(), status: "", statusErr: false, building: false, parts: {}, partErr: {}, error: null };
+
+const GENERAL_EXPECT = "Most people recover well from routine surgery with good preparation and support. Your surgeon will give you your own timeline.";
+
+function load() {
+  try {
+    const v2 = JSON.parse(localStorage.getItem(KEY));
+    if (v2) return v2;
+    const v1 = JSON.parse(localStorage.getItem(OLD_KEY)); // upgrade: keep the person's date and custom items, rebuild the plan
+    if (v1 && v1.date && v1.surgery) return { surgery: v1.surgery, date: v1.date, surgeon: v1.surgeon || "", key: v1.key || {}, done: {}, custom: v1.custom || [], plan: null };
+  } catch { /* fall through */ }
+  return null;
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* private mode */ } }
+
+/** General items first, then the surgery-specific ones (marked), then the person's own. Ids are unique. */
+function allItems() {
+  const seen = new Set(), out = [];
+  for (const i of CORE) { seen.add(i.id); out.push(i); }
+  for (const i of planView()?.items || []) if (!seen.has(i.id)) { seen.add(i.id); out.push({ ...i, tailored: true }); }
+  for (const i of state?.custom || []) out.push(i);
+  return out;
+}
+
+/* ============================================================
+   Tailored plan: one request. The server asks the AI model for the surgery-specific items.
+   state.plan = { source:"ai", parts:{ all }, accepted? }
+   Older saved plans have parts rehab/equip/recovery (or items directly); they still display.
+============================================================ */
+const PARTS = [{ key: "all", label: "Items for your surgery" }];
+const LEGACY_PARTS = ["rehab", "equip", "recovery"]; // plans saved when the plan was built in three requests
+let planRev = 0, buildGen = 0, memo = { plan: null, rev: -1, v: null };
+
+/** One merged view of the plan: items from every saved part (the current "all" part, plus any older parts), without repeats. */
+function planView() {
+  const p = state?.plan;
+  if (!p) return null;
+  if (!p.parts) return p; // core-only, or a plan saved by an older version
+  if (memo.plan === p && memo.rev === planRev) return memo.v;
+  const items = [], seen = new Set();
+  let expect = "", generatedAt = "", reviewed = false;
+  for (const key of [...LEGACY_PARTS, ...PARTS.map(x => x.key)]) {
+    const part = p.parts[key]; if (!part) continue;
+    for (const it of part.items || []) {
+      if (seen.has(it.id)) continue; seen.add(it.id);
+      items.push(it);
+    }
+    if (part.expect) expect = part.expect;
+    if (part.reviewed) reviewed = true; // the server marks plans a person read and approved
+    if (part.generatedAt > generatedAt) generatedAt = part.generatedAt;
+  }
+  const v = { source: "ai", items, expect, reviewed, generatedAt: generatedAt || new Date().toISOString() };
+  memo = { plan: p, rev: planRev, v };
+  return v;
+}
+const missingParts = () => {
+  const p = state?.plan;
+  if (!p) return PARTS.map(x => x.key);
+  if (p.source !== "ai" || !p.parts || p.accepted) return [];
+  if (LEGACY_PARTS.some(k => p.parts[k])) return []; // an older plan: it is complete, and Refresh rebuilds it
+  return PARTS.filter(x => !p.parts[x.key]).map(x => x.key);
+};
+
+/* ============================================================
+   Planning API
+============================================================ */
+const BUSY_MSG = "Surgi operates on free AI models, and sometimes they can be down. Please be patient, and use the basic plan or one of the three supported reviewed plans in the meantime: hip arthroscopy, shoulder arthroscopy, or knee replacement.";
+async function fetchPart(surgery, part, refresh = false) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 130000);
+  let res;
+  try {
+    res = await fetch("/api/plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ surgery, refresh }), signal: ctl.signal });
+  } catch (err) {
+    dbg("error", `[plan:${part}] request failed:`, err);
+    if (err && err.name === "AbortError") { const e = new Error(BUSY_MSG); e.busy = true; throw e; }
+    throw new Error(location.protocol === "file:"
+      ? "This app needs its small server to build plans. Run “python -m app” and open http://localhost:3000."
+      : "We couldn’t reach the planning server. Make sure “python -m app” is still running (check the terminal), then try again.");
+  } finally { clearTimeout(timer); }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) { dbg("warn", `[plan:${part}] server responded`, res.status, data); const e = new Error(data.error || `Something went wrong (${res.status}).`); if ([429, 502, 503, 504].includes(res.status) && !/LLM_API_KEY|out of credit/.test(data.error || "")) { e.message = BUSY_MSG; e.busy = true; } throw e; }
+  dbg("info", `[plan:${part}] received`, data.items?.length, "items; fromCache:", data.fromCache);
+  return data;
+}
+
+async function loadCore() {
+  try {
+    const r = await fetch("core-items.json");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    CORE = await r.json();
+    ui.error = null;
+  } catch (e) {
+    dbg("error", "[core] couldn’t load the general checklist:", e);
+    ui.error = "We couldn’t load the checklist. Make sure “python -m app” is running, then reload this page.";
+  }
+}
+
+/** Background: ask the server for the surgery-specific items and add them when they arrive. The general checklist stays usable meanwhile. */
+async function buildTailored(refresh = false) {
+  if (!state) return;
+  const keys = refresh ? PARTS.map(x => x.key) : missingParts();
+  if (!keys.length) return;
+  const gen = ++buildGen, surgery = state.surgery;
+  if (refresh && state.plan) state.plan.accepted = false;
+  ui.building = true; ui.busy = false; ui.status = ""; ui.parts = {}; ui.partErr = {};
+  keys.forEach(k => { ui.parts[k] = "loading"; });
+  render();
+  await Promise.all(keys.map(async k => {
+    try {
+      const r = await fetchPart(surgery, k, refresh);
+      if (gen !== buildGen || state.surgery !== surgery) return; // the person changed surgery or restarted while we waited
+      if (!state.plan || state.plan.source !== "ai" || !state.plan.parts) state.plan = { source: "ai", parts: {}, generatedAt: new Date().toISOString() };
+      state.plan.parts[k] = { items: r.items, expect: r.expect, model: r.model, reviewed: !!r.reviewed, generatedAt: r.generatedAt };
+      for (const old of LEGACY_PARTS) delete state.plan.parts[old]; // the new items replace an older three-part plan
+      planRev++; save(); ui.parts[k] = "done";
+    } catch (e) { if (gen !== buildGen) return; ui.parts[k] = "error"; ui.partErr[k] = e.message; if (e.busy) ui.busy = true; }
+    render();
+  }));
+  if (gen !== buildGen) return;
+  ui.building = false;
+  const n = planView()?.items.length || 0, failed = Object.keys(ui.partErr).length;
+  if (!failed) { ui.status = `Tailored plan ready: ${n} surgery-specific items.`; ui.statusErr = false; }
+  render();
+}
+
+/** Stop trying. Keeps whatever sections already arrived; with none, the plain general checklist. */
+function keepGeneral() {
+  buildGen++; ui.building = false; ui.partErr = {};
+  const pl = state.plan;
+  if (pl?.parts ? Object.keys(pl.parts).length : pl?.items?.length) { if (pl.parts) pl.accepted = true; }
+  else state.plan = { source: "core", items: [], expect: GENERAL_EXPECT, generatedAt: new Date().toISOString() };
+  save(); render();
+}
+
+function startPlan(p) {
+  state = { surgery: p.surgery, date: p.date, surgeon: p.surgeon, key: {}, done: {}, custom: [], plan: null, startedOn: isoDay(new Date()) };
+  ui.tab = "timeline"; ui.tl = {};
+  ui.error = null; ui.partErr = {}; save(); render();
+  buildTailored(false);
+}
+
+/* ============================================================
+   Rendering
+============================================================ */
+function render() {
+  const y = window.scrollY;
+  $("#app").innerHTML = state ? dashboard() : setup();
+  window.scrollTo(0, y);
+  document.title = state ? `${daysLabel()} · Surgi` : "Surgi";
+  startLoadingMessages();
+}
+
+let msgTimer = null;
+function startLoadingMessages() {
+  clearInterval(msgTimer);
+  const el = $("#loading-msg"); if (!el) return;
+  const msgs = ["Thinking about your surgery…", "Picking the most useful items…", "Writing them in plain language…", "Double-checking the details…"];
+  let i = 0;
+  msgTimer = setInterval(() => { i = Math.min(i + 1, msgs.length - 1); const m = $("#loading-msg"); if (m) m.textContent = msgs[i]; }, 6000);
+}
+
+function partRows() {
+  const icon = { loading: "⏳", done: "✅", error: "⚠️" };
+  return `<ul class="small" style="list-style:none;padding:0;margin:8px 0 0">${PARTS.filter(x => ui.parts[x.key]).map(x =>
+    `<li>${icon[ui.parts[x.key]]} ${esc(x.label)}${ui.parts[x.key] === "error" ? ` <span class="muted">· ${esc(ui.partErr[x.key])}</span>` : ""}</li>`).join("")}</ul>`;
+}
+
+function buildBanner() {
+  if (ui.building) return `
+  <div class="card building" role="status" aria-live="polite">
+    <div class="spin sm" aria-hidden="true"></div>
+    <div><b>Adding items for your surgery…</b>
+      <p class="muted small">Your general checklist is ready below. Your surgery-specific items will appear here, usually within a minute.</p>
+      ${partRows()}</div>
+  </div>`;
+  if (Object.keys(ui.partErr).length) {
+    const got = PARTS.filter(x => state.plan?.parts?.[x.key]).length;
+    return `
+  <div class="note err" role="alert"><b>${got ? `We added ${got} of ${PARTS.length} sections.` : "We couldn’t add surgery-specific items."}</b> ${ui.busy ? esc(BUSY_MSG) : "Free AI models are sometimes busy, so this can take another try."}
+    ${ui.busy ? "" : partRows()}
+    <div class="row" style="margin-top:10px"><button class="btn sm" data-act="retry" type="button">Try again${got ? " for the rest" : ""}</button>
+    <button class="btn ghost sm" data-act="keep-core" type="button">${got ? "Keep what I have" : "Keep the general checklist"}</button></div></div>`;
+  }
+  return "";
+}
+
+function setup() {
+  return `
+  <h1>Let’s get you ready 🌟</h1>
+  <p class="muted">Tell us about your surgery. You’ll get a general checklist right away, and we’ll add items for your specific surgery, written by AI from widely accepted practice.</p>
+  ${ui.error ? `<div class="note err" role="alert">${esc(ui.error)}</div>` : ""}
+  <form class="card" id="setup-form" autocomplete="off">
+    <label class="f" for="s-name">What surgery are you having?</label>
+    <input id="s-name" name="surgery" type="text" list="surgeries" placeholder="For example: hip arthroscopy" maxlength="80" required>
+    <datalist id="surgeries">${SUGGESTIONS.map(s => `<option value="${esc(s)}">`).join("")}</datalist>
+    <p class="small muted" style="margin-top:6px">Type any routine surgery. The list is just suggestions.</p>
+    <label class="f" for="s-date">Surgery date</label>
+    <input id="s-date" name="date" type="date" min="${todayISO()}" required>
+    <label class="f" for="s-surgeon">Surgeon’s name <span class="muted">(optional)</span></label>
+    <input id="s-surgeon" name="surgeon" type="text" placeholder="Dr. ...">
+    <div style="margin-top:18px"><button class="btn" type="submit">Build my checklist</button></div>
+  </form>
+  <p class="small muted">Your dates, name and progress stay on this device. Only the name of the surgery is sent to build the plan.</p>`;
+}
+
+function daysLabel() {
+  const n = diffDays(parseDate(state.date), new Date());
+  if (n > 0) return `${n} day${n === 1 ? "" : "s"} to go`;
+  if (n === 0) return "Surgery day";
+  return `Recovery day ${-n}`;
+}
+
+function countdown() {
+  const n = diffDays(parseDate(state.date), new Date());
+  const items = allItems();
+  const pct = ph => { const l = items.filter(i => i.phase === ph); return l.length ? Math.round(100 * l.filter(i => state.done[i.id]).length / l.length) : 0; };
+  let big, lbl, sub;
+  if (n > 0) {
+    big = n; lbl = n === 1 ? "day to go" : "days to go";
+    const when = n >= 45 ? `about ${Math.round(n / 30.4)} months` : n >= 14 ? `about ${Math.round(n / 7)} weeks` : "";
+    sub = when ? `That’s ${when}. Plenty of time to get ready!` : (n === 1 ? "Tomorrow’s the big day. You’re ready!" : "Almost there. You’re doing great!");
+  } else if (n === 0) {
+    big = "🎉"; lbl = "Today’s the day!"; sub = "Take a deep breath. Your team is ready for you.";
+  } else {
+    big = -n; lbl = -n === 1 ? "day of recovery" : "days of recovery"; sub = "Every day is a step forward.";
+  }
+  return `
+  <section class="card count" aria-live="polite">
+    <div class="big">${big}</div><div class="lbl">${lbl}</div><div class="sub">${sub}</div>
+    <div class="bars">
+      <div><div class="barlbl"><span>Before surgery</span><span>${pct("pre")}%</span></div><div class="bar"><i style="width:${pct("pre")}%"></i></div></div>
+      <div><div class="barlbl"><span>After surgery</span><span>${pct("post")}%</span></div><div class="bar"><i style="width:${pct("post")}%"></i></div></div>
+    </div>
+  </section>`;
+}
+
+function keyDetails() {
+  const k = state.key || {};
+  return `
+  <details class="card" id="key-details" ${ui.open.has("key") ? "open" : ""} data-id="key">
+    <summary style="cursor:pointer"><h2 style="display:inline">📌 Key details</h2> <span class="muted small">arrival time, fasting cut-off…</span></summary>
+    <p class="small muted" style="margin-top:8px">Fill these in once your surgery team gives them to you.</p>
+    <div class="grid2">
+      <div><label class="f" for="k-arrival">Arrival time</label><input id="k-arrival" data-key="arrival" type="text" value="${esc(k.arrival)}" placeholder="e.g. 6:30 AM"></div>
+      <div><label class="f" for="k-fast">Fasting cut-off (food)</label><input id="k-fast" data-key="fastFood" type="text" value="${esc(k.fastFood)}" placeholder="from your surgery team"></div>
+      <div><label class="f" for="k-fast2">Clear liquids cut-off</label><input id="k-fast2" data-key="fastLiquid" type="text" value="${esc(k.fastLiquid)}" placeholder="from your surgery team"></div>
+      <div><label class="f" for="k-phone">Surgeon / office phone</label><input id="k-phone" data-key="phone" type="tel" value="${esc(k.phone)}" placeholder="(555) 555-5555"></div>
+    </div>
+    <label class="f" for="k-meds">Medicines to pause (what and when)</label>
+    <textarea id="k-meds" data-key="stopMeds" placeholder="Write what your surgeon tells you">${esc(k.stopMeds)}</textarea>
+    <p class="safe" style="margin-top:10px">Use the times your surgery team gave you. They may differ from what’s typical.</p>
+  </details>`;
+}
+
+function howBuilt() {
+  const p = planView(), ai = !!p && p.source === "ai" && p.items.length > 0, reviewed = ai && !!p.reviewed;
+  const when = ai ? new Date(p.generatedAt).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" }) : "";
+  const intro = !ai
+    ? "You’re seeing the general checklist that fits most surgeries. Items specific to your surgery haven’t been added yet."
+    : reviewed
+      ? `The general checklist is the same for every surgery. The ✨ items for ${state.surgery} were first drafted by AI from widely accepted practice, then read and edited by a person before they were added here. They are still general guidance. No specific studies are cited.`
+      : `The general checklist is the same for every surgery. The ✨ items were written by AI on ${when} for ${state.surgery}, from widely accepted practice. A person has not reviewed them, so please check them with your care team. No specific studies are cited.`;
+  const badge = !ai ? "" : reviewed ? ` <span class="chip" style="white-space:nowrap">✓ Reviewed</span>` : ` <span class="chip" style="white-space:nowrap">AI-written, not reviewed</span>`;
+  return `
+  <details class="card" data-id="how" ${ui.open.has("how") ? "open" : ""}>
+    <summary style="cursor:pointer"><h2 style="display:inline">🔬 How this plan was made</h2>${badge}</summary>
+    <p style="margin-top:8px">${esc(intro)}</p>
+    <p class="small muted">AI can get details wrong or miss things, and every surgeon’s protocol is a little different. Treat this as a conversation starter for your care team, and follow their instructions if they differ.</p>
+    ${reviewed ? "" : `<div class="row" style="margin-top:12px"><button class="btn sm" data-act="refresh" type="button" ${ui.building ? "disabled" : ""}>${ai ? "Write new surgery-specific items" : "Add surgery-specific items"}</button></div>`}
+    <div class="status ${ui.statusErr ? "err" : ""}" role="status">${esc(ui.status)}</div>
+  </details>`;
+}
+
+/** An item is "late" when its ideal day was already behind the person on the day they set up (or changed) their surgery date. */
+function isLate(it, sd) {
+  if (it.d == null || it.d >= 0) return false;
+  const started = state.startedOn ? parseDate(state.startedOn) : new Date();
+  return it.d < diffDays(started, sd);
+}
+
+function dueChip(it, sd) {
+  if (it.d == null) return "";
+  if (isLate(it, sd)) return `<span class="chip">Do soon</span>`;
+  const date = addDays(sd, it.d);
+  if (it.phase === "pre") {
+    const label = it.d === 0 ? "Surgery day" : it.d === -1 ? "Day before" : `By ${fmt(date)}`;
+    return `<span class="chip">${label}</span>`;
+  }
+  return `<span class="chip">${it.d === 0 ? "Surgery day" : `Around ${fmt(date)} · day ${it.d}`}</span>`;
+}
+
+const SHORT_CAT = { insurance: "Insurance", paperwork: "Work paperwork", pt: "Physical therapy", meds: "Medicines", equip: "Equipment", home: "Home & meals", fast: "Fasting", bag: "Packing", recovery: "Healing" };
+
+function itemRow(it, sd, withCat = false) {
+  const done = !!state.done[it.id];
+  const chips = [dueChip(it, sd)];
+  if (withCat && CATS[it.cat]) chips.unshift(`<span class="chip">${CATS[it.cat].icon} ${SHORT_CAT[it.cat] || ""}</span>`);
+  if (it.tailored) chips.push(`<span class="chip tailored">✨ For your surgery</span>`);
+  if (it.tier === "need") chips.push(`<span class="chip need">Most people need this</span>`);
+  if (it.tier === "nice") chips.push(`<span class="chip">Nice to have</span>`);
+  const custom = String(it.id).startsWith("c-");
+  return `
+  <li class="item ${done ? "done" : ""}">
+    <label class="chk"><input type="checkbox" data-check="${esc(it.id)}" ${done ? "checked" : ""} aria-label="Mark done: ${esc(it.text)}"><span class="box" aria-hidden="true"></span></label>
+    <details data-id="${esc(it.id)}" ${ui.open.has(it.id) ? "open" : ""}>
+      <summary><span class="t">${esc(it.text)}</span><span class="chips">${chips.join("")}</span></summary>
+      <div class="more">
+        ${it.detail ? `<p>${esc(it.detail)}</p>` : ""}
+        <p class="safe">Confirm this with your surgeon or care team. Their advice comes first.</p>
+        ${custom ? `<button class="btn ghost sm" data-del="${esc(it.id)}" type="button">Remove</button>` : ""}
+      </div>
+    </details>
+  </li>`;
+}
+
+function checklist(phase) {
+  const sd = parseDate(state.date);
+  const order = phase === "pre" ? PRE_ORDER : POST_ORDER;
+  const items = allItems().filter(i => i.phase === phase);
+  let html = "";
+  for (const c of order) {
+    let list = items.filter(i => i.cat === c);
+    if (ui.hideDone) list = list.filter(i => !state.done[i.id]);
+    if (!list.length) continue;
+    list.sort((a, b) => (a.d ?? 999) - (b.d ?? 999));
+    html += `<section class="cat"><h2><span aria-hidden="true">${CATS[c].icon}</span> ${CATS[c].label}</h2><p class="hint">${CATS[c].hint}</p>
+      <ul class="list">${list.map(i => itemRow(i, sd)).join("")}</ul></section>`;
+  }
+  if (!html) html = `<div class="empty">🎉 Everything here is checked off. Nice work!</div>`;
+  const catOpts = order.map(c => `<option value="${c}">${CATS[c].label}</option>`).join("");
+  return `
+  <p class="small muted">Tap an item to see tips. Tap the box when it’s done.</p>
+  <label class="toggle"><input type="checkbox" data-hide ${ui.hideDone ? "checked" : ""}> Hide completed items</label>
+  ${html}
+  <form class="card add" data-add="${phase}">
+    <h3>Add your own item</h3>
+    <input type="text" name="text" placeholder="e.g. Ask about parking at the hospital" required maxlength="140" aria-label="New checklist item">
+    <select name="cat" aria-label="Category">${catOpts}</select>
+    <button class="btn sm" type="submit">Add to checklist</button>
+  </form>`;
+}
+
+/** The whole journey on one line, grouped by how far each item is from surgery day. */
+const TL_BUCKETS = [
+  { key: "m1", lo: -Infinity, hi: -29, title: "A month or more before" },
+  { key: "w24", lo: -28, hi: -14, title: "2 to 4 weeks before" },
+  { key: "w12", lo: -13, hi: -7, title: "1 to 2 weeks before" },
+  { key: "w1", lo: -6, hi: -2, title: "The last week" },
+  { key: "d1", lo: -1, hi: -1, title: "The day before" },
+  { key: "d0", lo: 0, hi: 0, title: "Surgery day", surgery: true },
+  { key: "r1", lo: 1, hi: 7, title: "First week of recovery" },
+  { key: "r24", lo: 8, hi: 28, title: "Weeks 2 to 4" },
+  { key: "r2m", lo: 29, hi: Infinity, title: "Month 2 and beyond" },
+];
+
+function timeline() {
+  const sd = parseDate(state.date), today = diffDays(new Date(), sd); // negative = days before surgery
+  const all = allItems();
+  const dated = all.filter(i => i.d != null), own = all.filter(i => i.d == null);
+  const rangeText = b => b.lo === b.hi ? fmt(addDays(sd, b.lo))
+    : b.lo === -Infinity ? `${fmt(addDays(sd, b.hi))} or earlier`
+    : b.hi === Infinity ? `${fmt(addDays(sd, b.lo))} and later`
+    : `${fmt(addDays(sd, b.lo))} to ${fmt(addDays(sd, b.hi))}`;
+
+  const lateItems = dated.filter(i => isLate(i, sd)).sort((x, y) => x.d - y.d);
+  const buckets = lateItems.length ? [{ key: "now", title: "Do these now", sub: "Your surgery is closer than these were planned for. Start at the top.", late: true }, ...TL_BUCKETS] : TL_BUCKETS;
+  const nodes = buckets.map(b => {
+    const mine = b.late ? lateItems : dated.filter(i => i.d >= b.lo && i.d <= b.hi && !isLate(i, sd)).sort((x, y) => x.d - y.d);
+    if (b.late) return { b, mine, openN: mine.filter(i => !state.done[i.id]).length, total: mine.length, past: false, current: true };
+    const openN = mine.filter(i => !state.done[i.id]).length;
+    return { b, mine, openN, total: mine.length, past: b.hi < today, current: b.lo <= today && today <= b.hi };
+  }).filter(n => n.total || n.b.surgery);
+
+  // where "today" goes: before the first stop that is not in the past
+  const firstUpcoming = nodes.findIndex(n => !n.past);
+  const nowIdx = firstUpcoming === -1 ? nodes.length : firstUpcoming;
+  const nowText = today < 0 ? `${-today} day${today === -1 ? "" : "s"} to go` : today === 0 ? "Surgery day" : `Recovery day ${today}`;
+  const nowNode = `<div class="tn now" role="listitem"><div class="tn-head"><span><span class="tn-title">You are here</span><span class="tn-sub">${fmt(new Date())} · ${nowText}</span></span></div></div>`;
+  // the first stop that is not in the past opens by default (unless it is the empty surgery-day marker)
+  const autoOpenIdx = nodes.findIndex((n, i) => i >= nowIdx && n.total);
+
+  const out = [];
+  nodes.forEach((n, i) => {
+    if (i === nowIdx) out.push(nowNode);
+    const { b } = n;
+    const list = ui.hideDone ? n.mine.filter(x => !state.done[x.id]) : n.mine;
+    const allDone = n.total > 0 && n.openN === 0;
+    const cls = b.surgery ? "surgery" : allDone ? "done" : n.past ? "open-past" : n.current ? "" : "later";
+    const badge = !n.total ? "" : allDone ? `<span class="tn-badge ok">✓ All done</span>`
+      : n.past ? `<span class="tn-badge warn">${n.openN} to wrap up</span>`
+      : `<span class="tn-badge">${n.total - n.openN} of ${n.total} done</span>`;
+    const head = `<span><span class="tn-title">${b.surgery ? "🏥 " : ""}${esc(b.title)}</span><span class="tn-sub">${esc(b.sub || rangeText(b))}</span></span>${badge}`;
+    if (!n.total) { out.push(`<div class="tn ${cls}" role="listitem"><div class="tn-head">${head}</div></div>`); return; }
+    const id = "tl-" + b.key;
+    const defaultOpen = i === autoOpenIdx || n.current; // earlier stops stay closed; their badge says how many are still open
+    const open = id in ui.tl ? ui.tl[id] : defaultOpen;
+    out.push(`<details class="tn ${cls}" role="listitem" data-id="${id}" ${open ? "open" : ""}>
+      <summary>${head}</summary>
+      ${list.length ? `<ul class="list">${list.map(x => itemRow(x, sd, true)).join("")}</ul>` : `<p class="small muted" style="margin-top:8px">Everything here is checked off. Nice work!</p>`}
+    </details>`);
+  });
+  if (nowIdx >= nodes.length) out.push(nowNode);
+  if (own.length) {
+    const list = ui.hideDone ? own.filter(x => !state.done[x.id]) : own;
+    out.push(`<div class="tn later" role="listitem"><div class="tn-head"><span><span class="tn-title">✏️ Your own items</span><span class="tn-sub">No date set</span></span></div>
+      ${list.length ? `<ul class="list">${list.map(x => itemRow(x, sd, false)).join("")}</ul>` : ""}</div>`);
+  }
+  return `
+  <p class="small muted">Your whole journey, in order. Tap a step to open it. Dates come from your surgery day, and your surgeon’s timing always comes first.</p>
+  <label class="toggle"><input type="checkbox" data-hide ${ui.hideDone ? "checked" : ""}> Hide completed items</label>
+  <div class="tl" role="list">${out.join("")}</div>`;
+}
+
+function settingsTab() {
+  return `
+  <section class="card">
+    <h2>Your surgery</h2>
+    <form id="edit-form" autocomplete="off">
+      <label class="f" for="e-name">Surgery</label>
+      <input id="e-name" name="surgery" type="text" list="surgeries" value="${esc(state.surgery)}" maxlength="80" required>
+      <datalist id="surgeries">${SUGGESTIONS.map(s => `<option value="${esc(s)}">`).join("")}</datalist>
+      <p class="small muted" style="margin-top:6px">Changing the surgery builds a new checklist. Your own items stay.</p>
+      <label class="f" for="e-date">Surgery date</label>
+      <input id="e-date" name="date" type="date" value="${esc(state.date)}" required>
+      <label class="f" for="e-surgeon">Surgeon</label>
+      <input id="e-surgeon" name="surgeon" type="text" value="${esc(state.surgeon)}">
+      <div style="margin-top:14px"><button class="btn" type="submit" ${ui.building ? "disabled" : ""}>Save changes</button></div>
+      <div class="status ${ui.statusErr ? "err" : ""}" role="status">${esc(ui.status)}</div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Save & share</h2>
+    <div class="row">
+      <button class="btn ghost sm" data-act="print" type="button">🖨️ Print checklist</button>
+      <button class="btn ghost sm" data-act="export" type="button">⬇️ Back up</button>
+      <label class="btn ghost sm" style="cursor:pointer">⬆️ Restore<input type="file" accept="application/json" data-import class="hide"></label>
+    </div>
+    <p class="small muted" style="margin-top:10px">Your plan lives only in this browser. Back it up if you want to move to another device.</p>
+  </section>
+
+  <section class="card">
+    <h2>Start over</h2>
+    <button class="btn danger sm" data-act="reset" type="button">Delete my plan</button>
+  </section>`;
+}
+
+function dashboard() {
+  const sd = parseDate(state.date);
+  const tabs = [["timeline", "Timeline"], ["pre", "Before"], ["post", "After"], ["set", "Settings"]];
+  return `
+  <h1>${esc(state.surgery)}</h1>
+  <p class="muted">${fmtLong(sd)}${state.surgeon ? ` · ${esc(state.surgeon)}` : ""}</p>
+  ${ui.error ? `<div class="note err" role="alert">${esc(ui.error)}</div>` : ""}
+  ${buildBanner()}
+  ${countdown()}
+  <div class="note">💛 ${esc(planView()?.expect || GENERAL_EXPECT)} <span class="small muted">Ask your surgeon about your specific plan.</span></div>
+  ${howBuilt()}
+  ${keyDetails()}
+  <div class="tabs" role="tablist">${tabs.map(([id, l]) => `<button role="tab" aria-selected="${ui.tab === id}" data-tab="${id}">${l}</button>`).join("")}</div>
+  ${ui.tab === "set" ? settingsTab() : ui.tab === "timeline" ? timeline() : checklist(ui.tab)}`;
+}
+
+/* ============================================================
+   Events
+============================================================ */
+document.addEventListener("submit", e => {
+  const f = e.target;
+  if (f.id === "setup-form") {
+    e.preventDefault();
+    const fd = new FormData(f);
+    startPlan({ surgery: fd.get("surgery").trim(), date: fd.get("date"), surgeon: fd.get("surgeon").trim() });
+  } else if (f.id === "edit-form") {
+    e.preventDefault();
+    const fd = new FormData(f);
+    const surgery = fd.get("surgery").trim();
+    const changed = surgery.toLowerCase() !== state.surgery.toLowerCase();
+    if (fd.get("date") !== state.date) state.startedOn = isoDay(new Date()); // a new date means a new runway
+    Object.assign(state, { date: fd.get("date"), surgeon: fd.get("surgeon").trim() });
+    if (changed) { state.surgery = surgery; state.plan = null; planRev++; buildGen++; save(); buildTailored(false); }
+    else { save(); ui.status = "Saved ✓"; ui.statusErr = false; render(); }
+  } else if (f.dataset.add) {
+    e.preventDefault();
+    const fd = new FormData(f);
+    state.custom.push({ id: "c-" + Date.now(), phase: f.dataset.add, cat: fd.get("cat"), d: null, text: fd.get("text").trim(), detail: "" });
+    save(); render();
+  }
+});
+
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.dataset.check) {
+    if (t.checked) state.done[t.dataset.check] = true; else delete state.done[t.dataset.check];
+    save(); render();
+  } else if (t.hasAttribute("data-hide")) {
+    ui.hideDone = t.checked; render();
+  } else if (t.dataset.key) {
+    state.key = state.key || {}; state.key[t.dataset.key] = t.value; save();
+  } else if (t.hasAttribute("data-import")) {
+    const file = t.files[0]; if (!file) return;
+    file.text().then(txt => {
+      try {
+        const obj = JSON.parse(txt);
+        if (!obj || !obj.date || !obj.surgery) throw new Error("bad file");
+        obj.plan = obj.plan && (Array.isArray(obj.plan.items) || obj.plan.parts) ? obj.plan : null; planRev++; obj.done = obj.done || {}; obj.custom = obj.custom || []; obj.key = obj.key || {};
+        state = obj; save(); render(); buildTailored(false);
+      } catch { ui.status = "That file doesn’t look like a backup from this app."; ui.statusErr = true; render(); }
+    });
+  }
+});
+
+document.addEventListener("click", e => {
+  const tab = e.target.closest("[data-tab]");
+  if (tab) { ui.tab = tab.dataset.tab; ui.status = ""; render(); window.scrollTo({ top: $(".tabs").offsetTop - 10 }); return; }
+  const del = e.target.closest("[data-del]");
+  if (del) { const id = del.dataset.del; state.custom = state.custom.filter(i => i.id !== id); delete state.done[id]; save(); render(); return; }
+  const act = e.target.closest("[data-act]")?.dataset.act;
+  if (!act) return;
+  if (act === "print") window.print();
+  if (act === "refresh") buildTailored(true);
+  if (act === "retry") buildTailored(missingParts().length === 0); // nothing missing means an older plan: rebuild it
+  if (act === "keep-core") keepGeneral();
+  if (act === "export") {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: "application/json" }));
+    a.download = "surgery-plan-backup.json"; a.click(); URL.revokeObjectURL(a.href);
+  }
+  if (act === "reset" && confirm("Delete your plan from this device? This can’t be undone.")) {
+    localStorage.removeItem(KEY); localStorage.removeItem(OLD_KEY); state = null;
+    ui = { tab: "timeline", tl: {}, hideDone: false, open: new Set(), status: "", statusErr: false, building: false, parts: {}, partErr: {}, error: null }; render();
+  }
+});
+
+/* Remember which <details> are open so re-renders don't close them (toggle doesn't bubble, so use capture) */
+document.addEventListener("toggle", e => {
+  const d = e.target; if (!(d instanceof HTMLDetailsElement) || !d.dataset.id) return;
+  if (d.dataset.id.startsWith("tl-")) { ui.tl[d.dataset.id] = d.open; return; } // timeline stops remember open/closed, including the automatic ones
+  d.open ? ui.open.add(d.dataset.id) : ui.open.delete(d.dataset.id);
+}, true);
+
+/* ============================================================
+   Boot
+============================================================ */
+render();
+loadCore().then(() => {
+  render();
+  if (state) buildTailored(false); // builds only what is missing: a new plan, an older version, or a build interrupted by a reload
+});
+</script>
+</body>
+</html>

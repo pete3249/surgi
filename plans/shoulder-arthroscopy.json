@@ -1,0 +1,114 @@
+{
+ "source": "ai",
+ "surgery": "Shoulder arthroscopy",
+ "expect": "Most people regain good shoulder movement over several weeks to months, with therapy guiding the pace. Your surgeon will give you your own timeline.",
+ "items": [
+  {
+   "id": "pt-pre-a423f1e9",
+   "phase": "pre",
+   "cat": "pt",
+   "d": -14,
+   "text": "Ask a therapist about pre-surgery shoulder exercises",
+   "detail": "Gentle range-of-motion and strengthening can help maintain muscle tone and make post-op rehab easier."
+  },
+  {
+   "id": "equ-pre-65dd510e",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -7,
+   "text": "Ask if you will need a shoulder sling",
+   "detail": "Some surgeons use a sling for comfort and others do not, and how long varies. Follow your surgeon's plan.",
+   "tier": "nice"
+  },
+  {
+   "id": "equ-pre-df219363",
+   "phase": "pre",
+   "cat": "equip",
+   "d": -7,
+   "text": "Get an ice pack",
+   "detail": "Ice for about 15 minutes at a time, up to a few times a day, with a cloth between the ice and your skin, can ease swelling and pain.",
+   "tier": "nice"
+  },
+  {
+   "id": "hom-pre-6b04d950",
+   "phase": "pre",
+   "cat": "home",
+   "d": -7,
+   "text": "Plan for help with dressing and reaching overhead",
+   "detail": "Your arm will be limited at first. Loose clothing helps, and you may need help with washing and hair. Dress the operated arm first."
+  },
+  {
+   "id": "pt-post-47223f8c",
+   "phase": "post",
+   "cat": "pt",
+   "d": 0,
+   "text": "Ask when physical therapy will start",
+   "detail": "Simple gentle exercises often start right away, with an outpatient visit booked later. If you have not heard about an appointment within 2 weeks, contact the service."
+  },
+  {
+   "id": "hom-post-612c5968",
+   "phase": "post",
+   "cat": "home",
+   "d": 0,
+   "text": "Ask about sleeping positions",
+   "detail": "Many people avoid the operated side, resting propped on their back or on the other side with pillows. Your surgeon may have advice about wearing a sling in bed."
+  },
+  {
+   "id": "rec-post-8434b79b",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask about lifting and carrying limits",
+   "detail": "Heavy lifting and carrying are often limited for the first couple of weeks and repeated overhead activity for longer; the plan depends on what was done."
+  },
+  {
+   "id": "rec-post-b8ff5744",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask which movements to avoid early on",
+   "detail": "Overhead reaching, heavy lifting and sudden movements are commonly limited, but the rules depend on your procedure. Follow your surgeon's plan."
+  },
+  {
+   "id": "rec-pre-6bd8f163",
+   "phase": "pre",
+   "cat": "recovery",
+   "d": -28,
+   "text": "Ask exactly which version of the surgery you are having",
+   "detail": "Arthroscopy can vary by side, repair type, and technique, and each may change your recovery plan."
+  },
+  {
+   "id": "equ-post-5fc2e68c",
+   "phase": "post",
+   "cat": "equip",
+   "d": 0,
+   "text": "Wear your sling as instructed",
+   "detail": "How long varies from a few days to several weeks, and some surgeons ask you to wear it in bed. Your team will tell you when to stop.",
+   "tier": "need"
+  },
+  {
+   "id": "rec-post-2e89031c",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 0,
+   "text": "Ask when you can drive",
+   "detail": "Driving is often avoided for at least the first few weeks, until you are out of the sling and off strong pain medicine; your surgeon will advise."
+  },
+  {
+   "id": "rec-post-1670b570",
+   "phase": "post",
+   "cat": "recovery",
+   "d": 7,
+   "text": "Ask about returning to work",
+   "detail": "Desk jobs may be possible within about a week, while heavy or overhead work usually needs longer; your surgeon will advise."
+  }
+ ],
+ "model": "dots-studio/dots-3-note-preview:free",
+ "generatedAt": "2026-10-26T18:31:53.337Z",
+ "stats": {
+  "dropped": 0,
+  "duplicates": 1
+ },
+ "fromCache": false,
+ "reviewed": true
+}

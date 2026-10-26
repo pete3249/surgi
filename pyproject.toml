@@ -1,0 +1,10 @@
+[project]
+name = "ready-for-surgery"
+version = "3.0.0"
+description = "Surgery prep and recovery checklists, with surgery-specific items written by AI"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]          # lets tests write `from app.planner import build_plan`
+testpaths = ["tests"]
+asyncio_mode = "auto"       # `async def test_...` just works, no decorator needed

@@ -1,0 +1,14 @@
+# Render "Blueprint": New + > Blueprint in the Render dashboard, point it at your repo.
+services:
+  - type: web
+    name: ready-for-surgery
+    runtime: docker
+    plan: free # free instances sleep when idle, so the first request after a pause is slow
+    healthCheckPath: /api/health
+    envVars:
+      - key: LLM_API_KEY
+        sync: false # you type the value in the dashboard; it is never stored in this file
+      - key: LLM_MODEL
+        value: openrouter/free
+      - key: TRUST_PROXY_HEADERS # Render sits in front of the app and sets X-Forwarded-For
+        value: "true"

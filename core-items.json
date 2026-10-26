@@ -1,0 +1,471 @@
+[
+  {
+    "id": "ins-auth",
+    "phase": "pre",
+    "cat": "insurance",
+    "d": -35,
+    "text": "Confirm your prior authorization is moving, and nothing is missing",
+    "detail": "Ask your surgeon's office if they've sent the request to your insurance. Then call your insurer and ask if they need anything else, like physical therapy records. Follow up until it's approved, and note the date, who you spoke with, and a reference number."
+  },
+  {
+    "id": "ins-network",
+    "phase": "pre",
+    "cat": "insurance",
+    "d": -35,
+    "text": "Check that your surgeon and hospital are in your insurance network",
+    "detail": "Ask your insurer if both are in-network for your plan. Federal rules now protect many patients from surprise bills for anesthesia and other hospital-based services, but not everything, so confirm and write down who you spoke with."
+  },
+  {
+    "id": "ins-cost",
+    "phase": "pre",
+    "cat": "insurance",
+    "d": -30,
+    "text": "Ask the hospital for an estimate of what you’ll owe",
+    "detail": "Ask the hospital or your surgeon’s office for an estimated cost. Your insurer can tell you your deductible and out-of-pocket maximum. Ask about payment plans if you need one."
+  },
+  {
+    "id": "ins-equip",
+    "phase": "pre",
+    "cat": "insurance",
+    "d": -21,
+    "text": "Ask whether insurance covers your recovery equipment",
+    "detail": "Some plans cover or help rent items like braces, ice machines or walkers. Ask your surgeon’s office which supplier they use."
+  },
+  {
+    "id": "pap-forms",
+    "phase": "pre",
+    "cat": "paperwork",
+    "d": -42,
+    "text": "Ask your employer (HR) about FMLA and short-term disability",
+    "detail": "Ask what forms they need, who fills out which part, and where to send them. FMLA is job-protected leave for those who qualify. Short-term disability, if offered, can replace part of your pay while you recover."
+  },
+  {
+    "id": "pap-submit",
+    "phase": "pre",
+    "cat": "paperwork",
+    "d": -28,
+    "text": "Send your FMLA and disability forms to your surgeon’s office",
+    "detail": "Note any deadlines, and keep a copy of everything. Ask how long the office needs to complete them, and check back to confirm they were sent."
+  },
+  {
+    "id": "pap-plan",
+    "phase": "pre",
+    "cat": "paperwork",
+    "d": -35,
+    "text": "Plan your time off and hand off work tasks",
+    "detail": "Ask your surgeon how long people with your type of surgery are often out of work, so you can plan with a realistic range. Then think through who covers what while you’re away."
+  },
+  {
+    "id": "pap-directive",
+    "phase": "pre",
+    "cat": "paperwork",
+    "d": -14,
+    "text": "Choose an emergency contact",
+    "detail": "The hospital will ask who to call during and after your surgery. Pick someone who will answer their phone, and tell them the date."
+  },
+  {
+    "id": "pt-ask",
+    "phase": "pre",
+    "cat": "pt",
+    "d": -35,
+    "text": "Ask your surgeon about “prehab” (exercises before surgery)",
+    "detail": "Prehab means working with a physical therapist before surgery to build strength and learn the exercises you’ll do after. It may give you a head start, and not every surgery needs it."
+  },
+  {
+    "id": "pt-book",
+    "phase": "pre",
+    "cat": "pt",
+    "d": -21,
+    "text": "Book your first physical therapy visit, if your surgeon recommends it",
+    "detail": "Good clinics fill up. Ask your surgeon when your first visit should happen, then schedule it now. Ask if your insurance needs a referral for physical therapy."
+  },
+  {
+    "id": "med-list",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -30,
+    "text": "Write down everything you take",
+    "detail": "Include prescriptions, over-the-counter pills, vitamins, herbal products, and supplements. Bring this list to your pre-surgery visit."
+  },
+  {
+    "id": "med-ask",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -21,
+    "text": "Ask exactly which medicines to pause, and on which dates",
+    "detail": "Get it in writing. Add the dates to your calendar. Ask about anything you take daily, especially blood thinners, diabetes medicines and weight-loss injections."
+  },
+  {
+    "id": "med-nicotine",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -30,
+    "text": "Cut back on nicotine and alcohol if your surgeon advises it",
+    "detail": "Nicotine can slow healing. If you want help quitting, your primary care provider can offer options."
+  },
+  {
+    "id": "med-nsaid",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -10,
+    "text": "Reminder: pause ibuprofen, naproxen & similar pain relievers if told to",
+    "detail": "These are often paused about a week or so before surgery because they can affect bleeding. The timing varies. Ask whether acetaminophen (Tylenol) is okay in the meantime."
+  },
+  {
+    "id": "med-thin",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -10,
+    "text": "Reminder: blood thinners & aspirin. Only stop on your surgeon’s instructions",
+    "detail": "Some people need to stop, some need a special plan. Don’t guess. Check with the surgeon and the doctor who prescribes it."
+  },
+  {
+    "id": "med-supp",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -10,
+    "text": "Reminder: pause fish oil, vitamin E and herbal supplements if told to",
+    "detail": "Some supplements can affect bleeding or anesthesia. Many teams ask you to pause them one to two weeks ahead. Confirm your timing."
+  },
+  {
+    "id": "med-diabetes",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -5,
+    "text": "Ask what to do with diabetes, weight-loss (GLP-1) and other daily medicines",
+    "detail": "Some may need to be adjusted or paused before anesthesia. Ask your surgeon or pre-op team exactly what to take or skip, including on surgery morning. Don't change them on your own."
+  },
+  {
+    "id": "med-fill",
+    "phase": "pre",
+    "cat": "meds",
+    "d": -7,
+    "text": "Fill your after-surgery prescriptions early",
+    "detail": "Often these are sent to your pharmacy ahead of time."
+  },
+  {
+  "id": "med-otc",
+  "phase": "pre",
+  "cat": "meds",
+  "d": -5,
+  "text": "Plan for constipation: ask which laxative to have on hand",
+  "detail": "Pain medicine and less movement can cause constipation. Ask your surgeon what they prefer, such as Miralax or a stool softener like Colace, and which over-the-counter pain medicine they approve."
+  },
+  {
+    "id": "home-help",
+    "phase": "pre",
+    "cat": "home",
+    "d": -14,
+    "text": "Line up a ride and a helper for the first days",
+    "detail": "You’ll need a ride home and, for most surgeries, someone nearby for at least the first day or two. Ask your surgeon how long."
+  },
+  {
+    "id": "home-pets",
+    "phase": "pre",
+    "cat": "home",
+    "d": -10,
+    "text": "Arrange care for pets, kids, or anyone who counts on you",
+    "detail": "Put a plan in place for the first week or so, when lifting and bending may be off-limits.",
+    "tier": "nice"
+  },
+  {
+    "id": "home-zone",
+    "phase": "pre",
+    "cat": "home",
+    "d": -10,
+    "text": "Set up a cozy recovery zone",
+    "detail": "Pick a comfy chair or bed with a side table for water, snacks, phone charger, TV remote, medicines and a notebook to log doses."
+  },
+  {
+    "id": "home-clear",
+    "phase": "pre",
+    "cat": "home",
+    "d": -7,
+    "text": "Clear walkways and make stairs safe",
+    "detail": "Remove loose rugs and cords, add night lights, and keep everyday items between waist and shoulder height."
+  },
+  {
+    "id": "home-meals",
+    "phase": "pre",
+    "cat": "home",
+    "d": -7,
+    "text": "Cook and freeze easy meals",
+    "detail": "Soups, casseroles and protein-rich foods that reheat in one step are ideal. Label with dates. Friends who ask “how can I help?” can make a meal train."
+  },
+  {
+    "id": "home-grocery",
+    "phase": "pre",
+    "cat": "home",
+    "d": -3,
+    "text": "Stock up on groceries, snacks and drinks",
+    "detail": "Think protein, fruit, fiber, and easy snacks. Fiber and fluids help keep digestion on track while taking pain medicine."
+  },
+  {
+    "id": "home-clean",
+    "phase": "pre",
+    "cat": "home",
+    "d": -2,
+    "text": "Do laundry, change the sheets and tidy up",
+    "detail": "Coming home to a clean, ready space feels great."
+  },
+  {
+    "id": "fast-confirm",
+    "phase": "pre",
+    "cat": "fast",
+    "d": -2,
+    "text": "Write down your arrival time and fasting cut-off",
+    "detail": "The hospital usually calls 1–2 days before surgery. “Fasting” means no food (and sometimes no certain drinks) for a set time before anesthesia. Your times may be different from other people’s. Add them to Key details at the top."
+  },
+  {
+    "id": "fast-shower",
+    "phase": "pre",
+    "cat": "fast",
+    "d": -1,
+    "text": "Shower the way your team asked",
+    "detail": "Some surgeons ask you to use a special soap. Skip lotions, powders and makeup on the surgery area unless told otherwise."
+  },
+  {
+    "id": "fast-morning",
+    "phase": "pre",
+    "cat": "fast",
+    "d": 0,
+    "text": "Surgery morning: follow your fasting rules exactly",
+    "detail": "If you eat or drink outside the rules, surgery can be delayed. Ask whether to take any morning medicines with a small sip of water."
+  },
+  {
+    "id": "bag-id",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Photo ID and insurance card",
+    "detail": "Also bring your medicine list."
+  },
+  {
+    "id": "bag-clothes",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Loose, comfy clothes and slip-on shoes",
+    "detail": "Pick clothes that fit over a brace, bandage or sling. Think elastic waists and button-up tops."
+  },
+  {
+    "id": "bag-aids",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Glasses, hearing aids or dentures (with cases)",
+    "detail": "Cases keep them safe and easy to find after surgery."
+  },
+  {
+    "id": "bag-cpap",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "CPAP machine, inhalers or other daily devices (if you use them)",
+    "detail": "Ask the hospital which ones to bring."
+  },
+  {
+    "id": "bag-gear",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Anything your surgeon asked you to bring",
+    "detail": "For example: crutches, a brace, or a sling. Ask your surgeon if you’re not sure."
+  },
+  {
+    "id": "bag-paper",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Copies of paperwork",
+    "detail": "Healthcare proxy form, FMLA copies, etc."
+  },
+  {
+    "id": "bag-home",
+    "phase": "pre",
+    "cat": "bag",
+    "d": -1,
+    "text": "Leave jewelry and valuables at home",
+    "detail": "You’ll be asked to remove jewelry and piercings before surgery."
+  },
+  {
+    "id": "rec-rest",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 0,
+    "text": "Rest, sip water, and go easy",
+    "detail": "The first day or two are for resting. Have your helper nearby."
+  },
+  {
+    "id": "rec-pain",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 0,
+    "text": "Take pain medicine as precribed by your surgeon",
+    "detail": "Staying on schedule is usually easier than catching up on pain. Don’t drive or make big decisions while taking medicines that make you drowsy."
+  },
+  {
+    "id": "rec-ice",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 0,
+    "text": "Use ice and raise the area if your surgeon recommends it",
+    "detail": "Ask how long and how often, and whether to use a barrier between ice and skin."
+  },
+  {
+    "id": "rec-clot",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 0,
+    "text": "Move as allowed to help prevent blood clots",
+    "detail": "Ask which movements are okay: ankle pumps and short walks are common. Ask your surgeon if you’ll need any other clot prevention."
+  },
+  {
+    "id": "rec-flags",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 0,
+    "text": "Know when to call",
+    "detail": "Call your surgeon’s office for fever, spreading redness, pus, swelling that’s getting worse, pain that medicine doesn’t control, or trouble keeping fluids down. Call 911 for chest pain, trouble breathing, or fainting."
+  },
+  {
+    "id": "rec-mood",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 3,
+    "text": "Check in on your mood, and reach out if it dips",
+    "detail": "Feeling low, worried or restless while you recover is common. Tell your surgeon or primary care provider, and lean on friends or family. If you ever think about hurting yourself, call or text 988 (US) right away, or call 911."
+  },
+  {
+    "id": "rec-wound",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 1,
+    "text": "Follow your bandage and showering instructions",
+    "detail": "Ask when you can shower and when dressings come off. Keep the area clean and dry until told otherwise."
+  },
+  {
+    "id": "rec-bowel",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 1,
+    "text": "Keep things moving",
+    "detail": "Pain medicine and less activity can cause constipation. Fluids, fiber and a stool softener (if your surgeon okays it) can help."
+  },
+  {
+    "id": "rec-meals",
+    "phase": "post",
+    "cat": "home",
+    "d": 1,
+    "text": "Eat simple, nourishing meals",
+    "detail": "Protein, fruits and vegetables help your body heal. Your freezer meals will be a big help."
+  },
+  {
+    "id": "rec-sleep",
+    "phase": "post",
+    "cat": "home",
+    "d": 1,
+    "text": "Set up your bed or chair for comfortable sleep",
+    "detail": "Extra pillows (such as a pregnancy pillow) can help you stay in a comfortable position. Ask your surgeon about positions to avoid.",
+    "tier": "nice"
+  },
+  {
+    "id": "rec-restart",
+    "phase": "post",
+    "cat": "meds",
+    "d": 3,
+    "text": "Ask when to restart medicines you paused",
+    "detail": "Blood thinners, aspirin and supplements each have their own restart plan. Get the dates from your surgeon."
+  },
+  {
+    "id": "rec-taper",
+    "phase": "post",
+    "cat": "meds",
+    "d": 7,
+    "text": "Check in on your pain medicine plan",
+    "detail": "Many people shift to lighter options over the first week or two. Follow your surgeon’s plan, and ask before mixing different pain medicines."
+  },
+  {
+    "id": "pt-home",
+    "phase": "post",
+    "cat": "pt",
+    "d": 1,
+    "text": "Do your home exercises as taught",
+    "detail": "Short, regular sessions are often better than long ones. Stop and call if something feels wrong."
+  },
+  {
+    "id": "pt-first",
+    "phase": "post",
+    "cat": "pt",
+    "d": 3,
+    "text": "Go to your first physical therapy visit",
+    "detail": "Bring your questions and wear loose clothes. Ask how to tell good soreness from a warning sign."
+  },
+  {
+    "id": "pt-progress",
+    "phase": "post",
+    "cat": "pt",
+    "d": 28,
+    "text": "Share your progress with your surgeon",
+    "detail": "Keep a simple log of range of motion, pain and how daily tasks feel."
+  },
+  {
+    "id": "pap-update",
+    "phase": "post",
+    "cat": "paperwork",
+    "d": 5,
+    "text": "Send any extra forms to your surgeon’s office",
+    "detail": "Employers and insurers sometimes ask for updates or doctor’s notes. Keep copies."
+  },
+  {
+    "id": "pap-rtw",
+    "phase": "post",
+    "cat": "paperwork",
+    "d": 21,
+    "text": "Ask about return-to-work timing and any restrictions",
+    "detail": "Get a note that spells out when you can return and what to avoid, like lifting, long standing or driving. Send it to HR."
+  },
+  {
+    "id": "pap-bills",
+    "phase": "post",
+    "cat": "paperwork",
+    "d": 35,
+    "text": "Review your insurance statements and bills",
+    "detail": "Make sure the claims match what you were told. Call the billing office with questions.",
+    "tier": "nice"
+  },
+  {
+    "id": "rec-follow",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 14,
+    "text": "Go to your follow-up visit",
+    "detail": "Often around two weeks after surgery. Bring your list of questions."
+  },
+  {
+    "id": "rec-drive",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 14,
+    "text": "Ask when it’s safe to drive",
+    "detail": "This depends on the surgery, which side was operated on, and whether you’re taking pain medicine."
+  },
+  {
+    "id": "rec-cheer",
+    "phase": "post",
+    "cat": "recovery",
+    "d": 30,
+    "text": "Celebrate how far you’ve come",
+    "detail": "Take a moment to notice your progress. Recovery is a marathon, and every milestone counts.",
+    "tier": "nice"
+  },
+  {
+    "id": "eq-return",
+    "phase": "post",
+    "cat": "equip",
+    "d": 60,
+    "text": "Return or end rentals when your surgeon says you’re ready",
+    "detail": "Check rental terms so you’re not paying longer than needed.",
+    "tier": "nice"
+  }
+]

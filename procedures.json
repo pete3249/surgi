@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "hip-arthroscopy",
+    "name": "Hip arthroscopy",
+    "aliases": ["hip arthroscopic surgery", "arthroscopic hip surgery", "hip arthroscopy surgery", "hip scope"]
+  },
+  {
+    "slug": "shoulder-arthroscopy",
+    "name": "Shoulder arthroscopy",
+    "aliases": ["shoulder arthroscopic surgery", "arthroscopic shoulder surgery", "shoulder arthroscopy surgery", "shoulder scope"]
+  },
+  {
+    "slug": "knee-replacement",
+    "name": "Knee replacement",
+    "aliases": ["total knee replacement", "total knee arthroplasty", "knee arthroplasty", "knee replacement surgery", "total knee replacement surgery", "tkr", "tka"]
+  }
+]
