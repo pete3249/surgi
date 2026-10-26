@@ -97,6 +97,15 @@ Set these as environment variables or in `.env`. The full list is in `app/config
 | `TRUST_PROXY_HEADERS` | false | Only behind a proxy you trust |
 | `HOST` / `PORT` | `127.0.0.1` / 3000 | Where the server listens |
 
+## Deployment
+
+Surgi runs on [Render](https://render.com) as a Docker web service on the free plan, built from the `main` branch of this repo using `Dockerfile` and `render.yaml`.
+
+- **Updates:** pushing to `main` triggers a new build and deploy automatically. That includes changes to code, `core-items.json`, `procedures.json` and approved plans in `plans/`. Drafts, tests and `.env` are never shipped.
+- **Settings and secrets:** `LLM_API_KEY`, `LLM_MODEL` and `LLM_FALLBACK_MODEL` are set under **Environment** in the Render dashboard, not in the repo. Changing one restarts the service without a new build. The local `.env` is not used on Render.
+- **After a deploy:** `/api/health` should show `llmKeyConfigured: true`, `coreItems` above 0, and `reviewedPlans` equal to `procedures`.
+- **Free plan behavior:** the service sleeps when idle, so the first visit after a pause is slow. The plan cache lives on temporary disk and is cleared on every deploy and restart. Reviewed plans are unaffected because they ship as files.
+
 ## Limits to know about
 
 - The AI writes from its training data and can be wrong or out of date. No code can check medical accuracy, and surgeon protocols vary, which is why the app keeps saying "ask your surgeon."
